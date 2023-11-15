@@ -33,6 +33,10 @@ const mutations: MutationTree <UserState> = {
     [types.USER_PARTIAL_ORDER_REJECTION_CONFIG_UPDATED] (state, payload) {
         state.partialOrderRejectionConfig = payload
     },
+    [types.USER_PWA_STATE_UPDATED] (state, payload) {
+        state.pwaState.registration = payload.registration;
+        state.pwaState.updateExists = payload.updateExists;
+    },
     [types.USER_NOTIFICATIONS_UPDATED] (state, payload) {
         state.notifications = payload
     },

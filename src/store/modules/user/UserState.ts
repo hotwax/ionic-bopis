@@ -6,7 +6,8 @@ export default interface UserState {
     preference: any;
     permissions: any;
     currentEComStore: any;
-    partialOrderRejectionConfig: any
+    partialOrderRejectionConfig: any;
+    pwaState: any;
     notifications: any;
     notificationPrefs: any;
     firebaseDeviceId: string;

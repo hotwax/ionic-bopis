@@ -108,13 +108,7 @@
       </section>
 
       <hr />
-      <div class="section-header">
-        <h1>
-          {{ translate('App') }}
-          <p class="overline">{{ "Version: " + appVersion }}</p>
-        </h1>
-        <p class="overline">{{ "Built: " + getDateTime(appInfo.builtTime) }}</p>
-      </div>
+      <DxpAppVersionInfo />
 
       <section>
         <ProductIdentifier />
@@ -239,7 +233,6 @@ import { mapGetters, useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import TimeZoneModal from './TimezoneModal.vue';
 import Image from '@/components/Image.vue';
-import { DateTime } from 'luxon';
 import { UserService } from '@/services/UserService'
 import { showToast } from '@/utils';
 import { hasError, removeClientRegistrationToken, subscribeTopic, unsubscribeTopic } from '@/adapter'
@@ -275,8 +268,6 @@ export default defineComponent({
   data(){
     return {
       baseURL: process.env.VUE_APP_BASE_URL,
-      appInfo: (process.env.VUE_APP_VERSION_INFO ? JSON.parse(process.env.VUE_APP_VERSION_INFO) : {}) as any,
-      appVersion: "",
       rerouteFulfillmentConfig: {
         // TODO Remove fromDate and directly store values making it loosely coupled with OMS
         allowDeliveryMethodUpdate: {},
@@ -301,9 +292,6 @@ export default defineComponent({
       firebaseDeviceId: 'user/getFirebaseDeviceId',
       notificationPrefs: 'user/getNotificationPrefs'
     })
-  },
-  mounted() {
-    this.appVersion = this.appInfo.branch ? (this.appInfo.branch + "-" + this.appInfo.revision) : this.appInfo.tag;
   },
   async ionViewWillEnter() {
     // Only fetch configuration when environment mapping exists
@@ -365,9 +353,6 @@ export default defineComponent({
     },
     setConfigurePickerPreference (ev: any){
       this.store.dispatch('user/setUserPreference', { configurePicker: ev.detail.checked })
-    },
-    getDateTime(time: any) {
-      return DateTime.fromMillis(time).toLocaleString(DateTime.DATETIME_MED);
     },
     async getAvailableShipmentMethods () {
       this.availableShipmentMethods = [];

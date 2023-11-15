@@ -10,6 +10,7 @@
   "Arrived": "到着",
   "Authenticating": "Authenticating",
   "Assign Pickers": "受け取り人の割当",
+  "Built: ": "Built: {builtDateTime}",
   "Catalog": "カタログ",
   "Cancel": "キャンセル",
   "Cancel order before fulfillment": "注文のキャンセル",
@@ -183,6 +184,7 @@
   "Worn Display": "すり切れたディスプレイ",
   "This order will be removed from your dashboard. This action cannot be undone.": "この注文はダッシュボードから削除されます。{ space } この操作は元に戻せません。",
   "Update notification preferences": "Update notification preferences",
+  "Version: ": "Version: {appVersion}",
   "View shipping orders along with pickup orders.": "店舗受取の注文と一緒に配送注文を表示します",
   "You do not have permission to access this page": "このページにアクセスする権限がありません",
   "Zipcode": "郵便番号"

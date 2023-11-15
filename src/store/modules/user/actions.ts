@@ -211,6 +211,10 @@ const actions: ActionTree<UserState, RootState> = {
     }
   },
 
+  updatePwaState({commit}, payload) {
+    commit(types.USER_PWA_STATE_UPDATED, payload);
+  },
+
   async getPartialOrderRejectionConfig ({ commit }) {
     let config = {};
     const params = {

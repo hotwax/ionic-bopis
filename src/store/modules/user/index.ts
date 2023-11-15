@@ -17,6 +17,10 @@ const userModule: Module<UserState, RootState> = {
         showPackingSlip: false,
         configurePicker: false
       },
+      pwaState: {
+        updateExists: false,
+        registration: null,
+      },
       currentEComStore: {},
       partialOrderRejectionConfig: {},
       permissions: [],
