@@ -14,6 +14,8 @@ import { initialise, resetConfig } from '@/adapter'
 import { useRouter } from 'vue-router';
 import { translate, useProductIdentificationStore } from "@hotwax/dxp-components";
 import logger from '@/logger'
+import { addNotification, storeClientRegistrationToken } from '@/utils/firebase';
+import { initialiseFirebaseApp } from '@hotwax/dxp-components';
 
 export default defineComponent({
   name: 'App',
@@ -98,6 +100,13 @@ export default defineComponent({
       await useProductIdentificationStore().getIdentificationPref(this.currentEComStore?.productStoreId)
         .catch((error) => logger.error(error));
     }
+
+    await initialiseFirebaseApp(
+      JSON.parse(process.env.VUE_APP_FIREBASE_CONFIG),
+      process.env.VUE_APP_FIREBASE_VAPID_KEY,
+      storeClientRegistrationToken,
+      addNotification,
+    )
   },
   unmounted() {
     emitter.off('presentLoader', this.presentLoader);
