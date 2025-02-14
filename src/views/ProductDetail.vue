@@ -300,7 +300,7 @@ export default defineComponent({
                 this.warehouseInventory += storeInventory.atp
               } else if (!isCurrentStore) {
                 // Only add to list if it is not a current store
-                this.otherStoresInventoryDetails.push({ facilityName: storeInventory.facilityName, stock: storeInventory.atp })
+                this.otherStoresInventoryDetails.push({ facilityName: storeInventory.facilityName, stock: storeInventory.atp, facilityId: storeInventory.facilityId })
                 this.otherStoresInventory += storeInventory.atp
               }
             }

@@ -27,5 +27,11 @@ const mutations: MutationTree <UtilState> = {
   [types.UTIL_ENUMERATIONS_UPDATED] (state, payload) {
     state.enumerations = payload
   },
+  [types.UTIL_FACILITY_LAT_LON_UPDATED] (state, payload) {
+    state.facilitiesLatLng[payload.facilityId] = payload.validCoords
+  },
+  [types.UTIL_STORES_INFORMATION_UPDATED] (state, payload) {
+    state.storesInformation = payload
+  }
 }
 export default mutations;

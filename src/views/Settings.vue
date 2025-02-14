@@ -296,6 +296,9 @@ export default defineComponent({
         this.getAvailableShipmentMethods();
         this.getRerouteFulfillmentConfiguration();
       }
+      // clear facility lat lon and stores information state when facility changes
+      this.store.dispatch("util/clearCurrentFacilityLatLon", {})
+      this.store.dispatch("util/clearStoresInformation", {})
     },
     async timeZoneUpdated(tzId: string) {
       await this.store.dispatch("user/setUserTimeZone", tzId)

@@ -378,6 +378,66 @@ const actions: ActionTree<UtilState, RootState> = {
 
   async clearEnumerations({ commit }) {
     commit(types.UTIL_ENUMERATIONS_UPDATED, {})
+  },
+
+  async fetchCurrentFacilityLatLon({ commit }, facilityId) {
+    const payload = {
+      inputFields: {
+        facilityId
+      },
+      entityName: "FacilityContactDetailByPurpose",
+      orderBy: "fromDate DESC",
+      filterByDate: "Y",
+      fieldList: ["latitude", "longitude"],
+      viewSize: 5
+    }
+
+    try {
+      const resp = await UtilService.fetchCurrentFacilityLatLon(payload)
+      
+      if (!hasError(resp) && resp.data?.docs.length > 0) {
+        // Find first doc with non-null coordinates
+        const validCoords = resp.data.docs.find((doc: any) => 
+          doc.latitude !== null && doc.longitude !== null
+        )
+        
+        if (validCoords) {
+          commit(types.UTIL_FACILITY_LAT_LON_UPDATED, { facilityId, validCoords })
+        }
+      } else {
+        throw resp.data
+      }
+    } catch (err) {
+      logger.error("Failed to fetch facility lat/long information", err)
+    }
+  },
+
+    async clearCurrentFacilityLatLon({ commit }) {
+    commit(types.UTIL_FACILITY_LAT_LON_UPDATED, {})
+  },
+
+  async fetchStoresInformation({ commit }, point) {
+    const payload = {
+      viewSize: 250,
+      filters: ["storeType: RETAIL_STORE"],
+      point: `${point.latitude},${point.longitude}`
+    }
+      
+    try {
+      const resp = await UtilService.fetchStoresInformation(payload)
+
+      if (!hasError(resp) && resp.data?.response?.docs?.length > 0) {
+        commit(types.UTIL_STORES_INFORMATION_UPDATED, resp.data.response.docs)
+      } else {
+        throw resp.data
+      }
+    } catch (err) {
+      logger.error("Failed to fetch stores information by lat/lon", err)
+    }
+  },
+
+  async clearStoresInformation({ commit }) {
+    commit(types.UTIL_STORES_INFORMATION_UPDATED, [])
   }
 }
 

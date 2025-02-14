@@ -147,6 +147,22 @@ const fetchEnumerations = async (payload: any): Promise<any> => {
   });
 }
 
+const fetchCurrentFacilityLatLon = async (payload: any): Promise<any> => {
+  return api({
+    url: "performFind",
+    method: "post",
+    data: payload
+  });
+}
+
+const fetchStoresInformation = async (payload: any): Promise<any> => {
+  return api({
+    url: "storeLookup",
+    method: "post",
+    data: payload
+  });
+}
+
 export const UtilService = {
   createEnumeration,
   createProductStoreSetting,
@@ -163,5 +179,7 @@ export const UtilService = {
   isEnumExists,
   resetPicker,
   updateProductStoreSetting,
-  fetchReservedQuantity
+  fetchReservedQuantity,
+  fetchCurrentFacilityLatLon,
+  fetchStoresInformation
 }
